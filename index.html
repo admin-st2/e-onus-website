@@ -3,151 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="E-onus Technologies Coming Soon page. Subscribe to stay updated!">
-    <meta name="keywords" content="E-onus Technologies, electric vehicles, EV, technology, coming soon">
-    <meta name="author" content="E-onus Technologies Team">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>E-onus Technologies - Coming Soon</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --text-color: #f0f0f0; /* Soft white for text */
-            --primary-color: #5cacee; /* Soft blue */
-            --secondary-color: #ffcc00; /* Soft yellow */
-            --accent-color: #63a4ff; /* Soft light blue */
-            --font-family: 'Roboto', sans-serif;
-        }
-
         body {
-            font-family: var(--font-family);
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            min-height: 100vh;
+            /* Reliable EV charging station image */
+            background: url('https://cdn.pixabay.com/photo/2018/01/31/12/16/architecture-3121009_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: url('https://images.unsplash.com/photo-1604079581593-e0c18feab7cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
-            background-size: cover;
-            color: var(--text-color);
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
         }
 
         .container {
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background for readability */
-            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black for better readability */
+            padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            max-width: 450px;
-            width: 100%;
-            backdrop-filter: blur(5px);
-        }
-
-        h1, h2, h3, p, label, a, #countdown {
-            transition: transform 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-        }
-
-        h1:hover, h2:hover, h3:hover, p:hover, label:hover, a:hover, #countdown:hover {
-            transform: scale(1.03);
-            color: var(--accent-color);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            position: relative;
+            margin-bottom: 60px; /* Push content up from the bottom */
         }
 
         h1 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            margin-bottom: 0.5em;
+            color: #e0e0e0;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        h1:hover {
+            color: #a4c8f0;
+            transform: scale(1.05);
+        }
+
+        p {
+            margin-bottom: 1em;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #d0d0d0;
+            transition: color 0.3s ease;
+        }
+
+        p:hover {
+            color: #a4c8f0;
         }
 
         #countdown {
             font-size: 1.5rem;
-            margin: 20px 0;
-            color: var(--secondary-color);
-            font-weight: bold;
+            margin: 1em 0;
+            padding: 0.5em;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
         }
 
-        p {
-            color: #ccc;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-            line-height: 1.5;
+        #countdown:hover {
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        label {
-            margin-bottom: 10px;
-            color: #ddd;
-            font-size: 1.1rem;
+        input, button {
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         input {
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #555;
-            border-radius: 5px;
-            font-size: 16px;
-            background: #333;
+            background: rgba(255, 255, 255, 0.2);
             color: #fff;
-            width: calc(100% - 24px);
-            box-sizing: border-box;
+        }
+
+        input::placeholder {
+            color: #ddd;
+        }
+
+        input:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         button {
-            padding: 12px 24px;
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            border: none;
-            border-radius: 5px;
+            background-color: #5cacee;
+            color: #fff;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            font-size: 16px;
-            outline: none;
         }
 
         button:hover {
-            background-color: var(--accent-color);
+            background-color: #7cb7dd;
             transform: translateY(-3px);
         }
 
         .validation-error {
-            color: #e57373;
-            font-size: 14px;
-            height: 20px; /* Keeps layout stable */
+            color: #ff867c;
+            font-size: 0.9rem;
+            height: 20px;
+            margin-top: -5px;
+        }
+
+        .validation-error:hover {
+            color: #ffaba9;
         }
 
         .copyright {
-            position: absolute;
+            color: #ccc;
+            font-size: 0.9rem;
+            position: fixed; /* Ensures it's always visible at the bottom */
             bottom: 10px;
             width: 100%;
             text-align: center;
-            color: #ccc;
-            font-size: 12px;
             transition: color 0.3s ease;
         }
 
         .copyright:hover {
-            color: var(--accent-color);
-            transform: scale(1.03);
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            #countdown {
+                font-size: 1.2rem;
+            }
         }
     </style>
-    <title>E-onus Technologies - Coming Soon</title>
 </head>
 <body>
     <div class="container">
         <h1>E-onus Technologies</h1>
         <p>Plug into Tomorrow with E-onus Technologies: Driving Change, Charging Forward!</p>
-        <div id="countdown"></div>
-        <form id="subscribe-form" novalidate>
-            <label for="email">Subscribe to be notified:</label>
-            <input type="email" id="email" placeholder="YourEmail@example.com" required aria-describedby="emailHelp">
+        <div id="countdown">Loading...</div>
+        <form id="subscribe-form">
+            <input type="email" id="email" placeholder="Your Email" required>
             <div class="validation-error" id="emailHelp"></div>
             <button type="submit">Subscribe</button>
         </form>
     </div>
-
     <div class="copyright">
         &copy; 2024 E-onus Technologies. All rights reserved.
     </div>
@@ -169,7 +181,7 @@
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s `;
 
                 if (distance < 0) {
                     clearInterval(updateInterval);
@@ -193,5 +205,3 @@
     </script>
 </body>
 </html>
-
-
