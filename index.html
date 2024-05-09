@@ -3,41 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-onus Technologies Coming Soon page. Subscribe to stay updated!">
+    <meta name="keywords" content="E-onus Technologies, electric vehicles, EV, technology, coming soon">
+    <meta name="author" content="E-onus Technologies Team">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --text-color: #f0f0f0; /* Soft white for text */
+            --primary-color: #5cacee; /* Soft blue */
+            --secondary-color: #ffcc00; /* Soft yellow */
+            --accent-color: #63a4ff; /* Soft light blue */
+            --font-family: 'Roboto', sans-serif;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background: #1a1a1a; /* Metallic Black Color */
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            color: #fff;
+            background: url('https://images.unsplash.com/photo-1604079581593-e0c18feab7cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-color);
         }
 
         .container {
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background for readability */
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
             width: 100%;
+            backdrop-filter: blur(5px);
+        }
+
+        h1, h2, h3, p, label, a, #countdown {
+            transition: transform 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        h1:hover, h2:hover, h3:hover, p:hover, label:hover, a:hover, #countdown:hover {
+            transform: scale(1.03);
+            color: var(--accent-color);
         }
 
         h1 {
-            color: #42a5f5;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
 
         #countdown {
-            font-size: 24px;
+            font-size: 1.5rem;
             margin: 20px 0;
-            color: #fbc02d;
+            color: var(--secondary-color);
+            font-weight: bold;
         }
 
         p {
             color: #ccc;
             margin-bottom: 20px;
+            font-size: 1.2rem;
+            line-height: 1.5;
         }
 
         form {
@@ -46,30 +77,47 @@
             align-items: center;
         }
 
+        label {
+            margin-bottom: 10px;
+            color: #ddd;
+            font-size: 1.1rem;
+        }
+
         input {
             padding: 12px;
             margin-bottom: 20px;
-            border: none;
+            border: 2px solid #555;
             border-radius: 5px;
             font-size: 16px;
+            background: #333;
+            color: #fff;
+            width: calc(100% - 24px);
+            box-sizing: border-box;
         }
 
         button {
             padding: 12px 24px;
-            background-color: #42a5f5;
-            color: #fff;
+            background-color: var(--primary-color);
+            color: var(--text-color);
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
             font-size: 16px;
+            outline: none;
         }
 
         button:hover {
-            background-color: #1e88e5;
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
         }
 
-        /* Copyright Section */
+        .validation-error {
+            color: #e57373;
+            font-size: 14px;
+            height: 20px; /* Keeps layout stable */
+        }
+
         .copyright {
             position: absolute;
             bottom: 10px;
@@ -77,58 +125,73 @@
             text-align: center;
             color: #ccc;
             font-size: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .copyright:hover {
+            color: var(--accent-color);
+            transform: scale(1.03);
         }
     </style>
-    <title>E-onus - Coming Soon</title>
+    <title>E-onus Technologies - Coming Soon</title>
 </head>
 <body>
     <div class="container">
-        <h1>E-onus</h1>
-        <p>Plug into Tomorrow with E-onus: Driving Change, Charging Forward!</p>
+        <h1>E-onus Technologies</h1>
+        <p>Plug into Tomorrow with E-onus Technologies: Driving Change, Charging Forward!</p>
         <div id="countdown"></div>
-        <form id="subscribe-form">
+        <form id="subscribe-form" novalidate>
             <label for="email">Subscribe to be notified:</label>
-            <input type="email" id="email" placeholder="YourEmail@example.com" required>
+            <input type="email" id="email" placeholder="YourEmail@example.com" required aria-describedby="emailHelp">
+            <div class="validation-error" id="emailHelp"></div>
             <button type="submit">Subscribe</button>
         </form>
     </div>
 
-    <!-- Copyright Section -->
     <div class="copyright">
-        &copy; 2024 E-onus.com. All rights reserved.
+        &copy; 2024 E-onus Technologies. All rights reserved.
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Set the date we're counting down to
-            var countDownDate = new Date("June 30, 2024 00:00:00").getTime();
+        document.addEventListener('DOMContentLoaded', () => {
+            const countDownDate = new Date("August 1, 2024 00:00:00").getTime();
+            const countdownElement = document.getElementById("countdown");
+            const emailInput = document.getElementById("email");
+            const form = document.getElementById("subscribe-form");
+            const emailHelp = document.getElementById("emailHelp");
 
-            // Update the countdown every 1 second
-            var x = setInterval(function () {
-                var now = new Date().getTime();
-                var distance = countDownDate - now;
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
 
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                document.getElementById("countdown").innerHTML = days + "d " + hours + "h " +
-                    minutes + "m " + seconds + "s ";
+                countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
-                // If the countdown is over, display a message
                 if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById("countdown").innerHTML = "EXPIRED";
+                    clearInterval(updateInterval);
+                    countdownElement.innerHTML = "EXPIRED";
                 }
-            }, 1000);
+            }
 
-            // Subscribe form submission
-            document.getElementById("subscribe-form").addEventListener("submit", function (event) {
+            const updateInterval = setInterval(updateCountdown, 1000);
+
+            form.addEventListener("submit", (event) => {
                 event.preventDefault();
-                alert("Thanks for subscribing!");
+                const email = emailInput.value;
+                if (email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+                    alert("Thanks for subscribing!");
+                    emailHelp.textContent = "";
+                } else {
+                    emailHelp.textContent = "Please enter a valid email address.";
+                }
             });
         });
     </script>
 </body>
 </html>
+
+
