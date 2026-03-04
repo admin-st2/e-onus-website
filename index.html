@@ -19,13 +19,18 @@
       --btnText:#fff;
 
       --max: 1120px;
+      --radius: 18px;
+
+      /* FONT: Times New Roman (headlines), sans (body) */
+      --serif: "Times New Roman", Times, Georgia, serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family: var(--sans);
       color:var(--text);
       background:var(--bg);
       line-height:1.45;
@@ -33,7 +38,7 @@
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
 
-    /* Tesla-like minimal sticky nav */
+    /* HEADER (minimal, Tesla-ish) */
     header{
       position:fixed; top:0; left:0; right:0; z-index:50;
       background: rgba(255,255,255,.86);
@@ -52,12 +57,12 @@
     .brand{
       display:flex; align-items:center; gap:10px;
       text-decoration:none;
-      min-width: 220px;
+      min-width: 240px;
     }
     .mark{
       width:30px; height:30px; border-radius:12px;
       border:1px solid rgba(11,15,24,.10);
-      background: linear-gradient(135deg, rgba(11,15,24,.08), rgba(11,15,24,.02));
+      background: linear-gradient(135deg, rgba(11,15,24,.09), rgba(11,15,24,.02));
       position:relative;
     }
     .mark:after{
@@ -66,10 +71,10 @@
       border:1px solid rgba(11,15,24,.25);
       transform: rotate(10deg); opacity:.55;
     }
-    .brand strong{font-weight:950; letter-spacing:.2px;}
+    .brand strong{font-weight:950; letter-spacing:.25px;}
     .brand span{display:block; margin-top:2px; font-size:12.5px; color:var(--muted2);}
 
-    nav{display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:flex-end;}
+    nav{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
     .navlink{
       text-decoration:none;
       font-weight:750;
@@ -93,13 +98,13 @@
     }
     .navcta:hover{filter:brightness(.95)}
 
-    /* Panels: Tesla feel */
+    /* PANELS */
     .panel{
       min-height: 100vh;
       position:relative;
       display:flex;
       align-items:flex-end;
-      padding: 98px 0 64px; /* leave space for fixed nav */
+      padding: 98px 0 64px; /* room for fixed header */
       border-bottom: 1px solid rgba(11,15,24,.06);
     }
     .panel .inner{
@@ -109,25 +114,32 @@
       padding: 0 18px;
     }
 
-    .bg{
+    /* INDUSTRIAL TECH BACKGROUND GRID (subtle) */
+    .panel:after{
+      content:"";
       position:absolute; inset:0;
-      z-index:-2;
-      overflow:hidden;
-      background:#000;
+      background:
+        linear-gradient(transparent 92%, rgba(255,255,255,.05) 92%, transparent 94%),
+        linear-gradient(90deg, transparent 92%, rgba(255,255,255,.05) 92%, transparent 94%);
+      background-size: 56px 56px, 56px 56px;
+      opacity:.20;
+      pointer-events:none;
+      mix-blend-mode: overlay;
     }
+
+    .bg{position:absolute; inset:0; z-index:-2; overflow:hidden; background:#000;}
     .bg img{
       width:100%;
       height:100%;
       object-fit:cover;
       transform: scale(1.02);
-      filter: saturate(1.05) contrast(1.02);
+      filter: saturate(1.06) contrast(1.05);
     }
     .shade{
-      position:absolute; inset:0;
-      z-index:-1;
+      position:absolute; inset:0; z-index:-1;
       background:
-        linear-gradient(to top, rgba(0,0,0,.66) 0%, rgba(0,0,0,.26) 44%, rgba(0,0,0,.08) 75%, rgba(0,0,0,0) 100%),
-        radial-gradient(800px 420px at 20% 20%, rgba(0,0,0,.30), transparent 60%);
+        linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.30) 44%, rgba(0,0,0,.10) 76%, rgba(0,0,0,0) 100%),
+        radial-gradient(900px 480px at 20% 20%, rgba(0,0,0,.34), transparent 60%);
     }
 
     .kicker{
@@ -135,7 +147,7 @@
       font-weight:850;
       font-size:12.5px;
       letter-spacing:.2px;
-      color: rgba(255,255,255,.86);
+      color: rgba(255,255,255,.88);
       padding:8px 10px;
       border-radius:999px;
       background: rgba(255,255,255,.10);
@@ -143,31 +155,43 @@
     }
     .dot{
       width:8px; height:8px; border-radius:50%;
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 0 0 4px rgba(255,255,255,.14);
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 0 0 4px rgba(255,255,255,.16);
     }
 
+    /* HEADLINES: Times New Roman */
+    h1, h2{
+      font-family: var(--serif);
+      font-weight: 700;
+      letter-spacing: -0.6px;
+    }
     h1{
       margin:14px 0 10px;
-      font-size: clamp(36px, 5.5vw, 68px);
-      line-height:1.01;
-      letter-spacing:-1px;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height:1.00;
       color:#fff;
-      max-width: 20ch;
+      max-width: 18ch;
     }
     h2{
-      margin:12px 0 8px;
-      font-size: clamp(26px, 3.5vw, 44px);
+      margin:12px 0 10px;
+      font-size: clamp(30px, 4vw, 52px);
       line-height:1.05;
-      letter-spacing:-.7px;
       color:#fff;
       max-width: 22ch;
     }
+
+    /* Tesla rule: keep it short */
     .lead{
       margin:0;
       font-size: 17px;
-      color: rgba(255,255,255,.86);
-      max-width: 78ch;
+      color: rgba(255,255,255,.88);
+      max-width: 64ch; /* tighter for premium feel */
+    }
+    .micro{
+      margin-top:10px;
+      color: rgba(255,255,255,.74);
+      font-size: 13px;
+      max-width: 70ch;
     }
 
     .actions{
@@ -192,18 +216,20 @@
     }
     .btn.primary:hover{filter:brightness(.96)}
 
-    /* Clean “Tesla spec rows” section (white) */
+    /* WHITE SECTIONS (industrial spec rows) */
     .section{
       background:#fff;
       color: var(--text);
       padding: 72px 0;
     }
     .section h3{
+      font-family: var(--serif);
       margin:0 0 10px;
-      font-size: 20px;
-      letter-spacing:-.2px;
+      font-size: 26px;
+      letter-spacing: -0.4px;
     }
     .section p{margin:0; color:var(--muted); max-width: 78ch;}
+
     .rows{
       margin-top:18px;
       border-top:1px solid rgba(11,15,24,.10);
@@ -215,7 +241,7 @@
       padding: 16px 0;
       border-bottom:1px solid rgba(11,15,24,.10);
     }
-    .row b{min-width: 240px}
+    .row b{min-width: 260px}
     .row span{color:var(--muted)}
     .tag{
       font-size:12px;
@@ -229,7 +255,7 @@
       height: fit-content;
     }
 
-    /* RFQ box */
+    /* RFQ */
     .rfqBox{
       margin-top:18px;
       border:1px solid rgba(11,15,24,.10);
@@ -266,13 +292,14 @@
       border-top:1px solid rgba(11,15,24,.08);
     }
 
-    /* Mobile */
+    /* MOBILE */
     @media (max-width: 860px){
       nav{display:none}
       .row{flex-direction:column}
       .tag{align-self:flex-start}
       form{grid-template-columns:1fr}
       .panel{padding: 92px 0 54px}
+      .lead{max-width: 60ch}
     }
   </style>
 </head>
@@ -284,12 +311,12 @@
         <span class="mark" aria-hidden="true"></span>
         <div>
           <strong>E-Onus Technologies</strong>
-          <span>Build & assemble • OEM + fleet Level 2 charging • RFID access</span>
+          <span>Build & assemble • OEM + fleet • Quality & testing</span>
         </div>
       </a>
 
       <nav aria-label="Primary">
-        <a class="navlink" href="#platform">Platform</a>
+        <a class="navlink" href="#platform">OEM & Fleet</a>
         <a class="navlink" href="#products">Products</a>
         <a class="navlink" href="#quality">Quality</a>
         <a class="navlink" href="#contact">Contact</a>
@@ -298,41 +325,33 @@
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- HERO: shorter + stronger -->
   <section id="top" class="panel">
-    <div class="bg">
-      <img src="assets/img/hero.jpg" alt="EV charging close-up" />
-    </div>
+    <div class="bg"><img src="assets/img/hero.jpg" alt="EV charging close-up" /></div>
     <div class="shade"></div>
 
     <div class="inner">
       <div class="kicker"><span class="dot" aria-hidden="true"></span> OEM programs • Fleet deployments • Level 2 hardware</div>
       <h1>Charging hardware that scales.</h1>
-      <p class="lead">
-        E-Onus Technologies builds and assembles Level 2 EV chargers and critical components for OEM and fleet programs—
-        designed for repeatable deployment, supportability, and RFID-controlled access.
-      </p>
+      <p class="lead">Built and assembled for OEM and fleet Level 2 deployments.</p>
+      <p class="micro">RFID control • cables & extension cords • control boards • portable chargers • verification gates</p>
 
       <div class="actions">
-        <a class="btn primary" href="#rfq">Request an OEM/Fleet quote</a>
-        <a class="btn" href="#products">See products</a>
+        <a class="btn primary" href="#rfq">Request RFQ</a>
+        <a class="btn" href="#products">View products</a>
       </div>
     </div>
   </section>
 
-  <!-- PLATFORM / OEM + FLEET -->
+  <!-- OEM + FLEET PANEL -->
   <section id="platform" class="panel">
-    <div class="bg">
-      <img src="assets/img/fleet.jpg" alt="Fleet and commercial EV charging environment" />
-    </div>
+    <div class="bg"><img src="assets/img/fleet.jpg" alt="Fleet and commercial EV charging environment" /></div>
     <div class="shade"></div>
 
     <div class="inner">
-      <h2>Built for OEM + fleet reality.</h2>
-      <p class="lead">
-        Fast rollouts need clarity: controlled access, repeatable builds, and serviceability-first design.
-        Simple proof, program-ready execution.
-      </p>
+      <h2>Industrial reliability for fleet operations.</h2>
+      <p class="lead">Access-controlled, repeatable builds designed for rollout speed and serviceability.</p>
+      <p class="micro">Procurement-friendly • deployment-first • support planning built in</p>
 
       <div class="actions">
         <a class="btn primary" href="#products">Explore products</a>
@@ -341,64 +360,36 @@
     </div>
   </section>
 
-  <!-- PRODUCTS -->
+  <!-- PRODUCTS (clean rows) -->
   <section id="products" class="section">
     <div class="wrap">
       <h3>Products & components</h3>
-      <p>Level 2 chargers plus the pieces that make deployment work: portable chargers, extension cords, control boards, charging cables, and RFID control.</p>
+      <p>High-tech hardware and deployment-critical components for OEM programs and fleet sites.</p>
 
       <div class="rows" role="list">
-        <div class="row" role="listitem">
-          <b>Level 2 EV Chargers</b>
-          <span>Fleet/commercial-ready hardware designed for consistent rollout.</span>
-          <span class="tag">Core</span>
-        </div>
-        <div class="row" role="listitem">
-          <b>Portable Chargers</b>
-          <span>Flexible charging tools for field and service use cases.</span>
-          <span class="tag">Portable</span>
-        </div>
-        <div class="row" role="listitem">
-          <b>Extension Cords</b>
-          <span>Heavy-duty power delivery accessories for real-world conditions.</span>
-          <span class="tag">Accessory</span>
-        </div>
-        <div class="row" role="listitem">
-          <b>Control Boards</b>
-          <span>Electronics for stable operation and integration.</span>
-          <span class="tag">Electronics</span>
-        </div>
-        <div class="row" role="listitem">
-          <b>Charging Cables</b>
-          <span>Durable cables designed for repeated daily use and field replacement.</span>
-          <span class="tag">Accessory</span>
-        </div>
-        <div class="row" role="listitem">
-          <b>RFID Control</b>
-          <span>Access control for managed charging environments.</span>
-          <span class="tag">Access</span>
-        </div>
+        <div class="row" role="listitem"><b>Level 2 EV Chargers</b><span>Fleet/commercial-ready hardware designed for consistent rollout.</span><span class="tag">Core</span></div>
+        <div class="row" role="listitem"><b>RFID Control</b><span>Access control for managed charging environments and shared sites.</span><span class="tag">Access</span></div>
+        <div class="row" role="listitem"><b>Control Boards</b><span>Electronics for stable operation and integration pathways.</span><span class="tag">Electronics</span></div>
+        <div class="row" role="listitem"><b>Charging Cables</b><span>Durable cables designed for daily use and field replacement.</span><span class="tag">Accessory</span></div>
+        <div class="row" role="listitem"><b>Portable Chargers</b><span>Flexible charging tools for field/service use cases.</span><span class="tag">Portable</span></div>
+        <div class="row" role="listitem"><b>Extension Cords</b><span>Heavy-duty power delivery accessories for industrial conditions.</span><span class="tag">Accessory</span></div>
       </div>
     </div>
   </section>
 
   <!-- QUALITY PANEL -->
   <section id="quality" class="panel">
-    <div class="bg">
-      <img src="assets/img/inside.jpg" alt="EV internal components visualization" />
-    </div>
+    <div class="bg"><img src="assets/img/inside.jpg" alt="EV internal components visualization" /></div>
     <div class="shade"></div>
 
     <div class="inner">
-      <h2>Quality & testing built-in.</h2>
-      <p class="lead">
-        Incoming inspection, assembly QA gates, electrical verification, functional validation,
-        RFID checks (where applicable), and final inspection before pack-out.
-      </p>
+      <h2>Quality & testing built in.</h2>
+      <p class="lead">Verification gates that reduce defects and protect rollout timelines.</p>
+      <p class="micro">Incoming inspection • assembly QA gates • electrical verification • functional validation • RFID checks • final inspection</p>
 
       <div class="actions">
         <a class="btn primary" href="#rfq">Request RFQ</a>
-        <a class="btn" href="#products">Back to products</a>
+        <a class="btn" href="#contact">Contact</a>
       </div>
     </div>
   </section>
@@ -407,7 +398,7 @@
   <section id="contact" class="section">
     <div class="wrap">
       <h3>Contact & RFQ</h3>
-      <p>Share sites, quantities, and RFID needs. This opens your email client and sends details to <b>info@e-onus.com</b>.</p>
+      <p>Send rollout details (sites, quantities, RFID needs). This form opens your email client and sends to <b>info@e-onus.com</b>.</p>
 
       <div id="rfq" class="rfqBox">
         <form id="rfqForm" novalidate>
@@ -425,7 +416,7 @@
           <a class="btn" href="mailto:info@e-onus.com?subject=E-Onus%20RFQ%20%7C%20OEM%20%2B%20Fleet" style="border-color:rgba(11,15,24,.18);color:#111827;background:#fff;">Send via email app</a>
         </div>
 
-        <div class="hint" id="rfqNote">Tip: include sites + quantity + RFID needs for the fastest quote.</div>
+        <div class="hint" id="rfqNote">Tip: include sites + quantity + RFID needs for the fastest response.</div>
       </div>
 
       <footer>
@@ -479,7 +470,7 @@ ${message}`
       note.textContent = "Opening your email app to send the RFQ…";
     });
 
-    // Active nav highlight as you scroll
+    // Active nav highlight (scroll spy)
     const links = Array.from(document.querySelectorAll("nav .navlink"));
     const sections = links
       .map(a => document.querySelector(a.getAttribute("href")))
