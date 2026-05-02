@@ -1,493 +1,1035 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#ffffff" />
-  <title>E-Onus Technologies | OEM & Fleet Level 2 Charging</title>
-  <meta name="description" content="E-Onus Technologies builds and assembles Level 2 EV charging hardware and components for OEM programs and fleet deployments—RFID control, cables, extension cords, portable chargers, and control boards." />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>E-onus Technologies — EV Charging & OEM Manufacturing</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#e8000d;--red-dk:#b8000a;--red-lt:rgba(232,0,13,.08);
+  --black:#0d0d0d;--dark:#161616;--steel:#1e2430;
+  --gray:#6e7a8a;--lgray:#dde2e8;--bg:#f4f6f8;--white:#fff;
+  --h:'Syne',sans-serif;--b:'Inter',sans-serif;
+  --r:3px;
+  --shadow:0 4px 24px rgba(0,0,0,.08);
+  --shadow-lg:0 16px 48px rgba(0,0,0,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--b);font-size:16px;color:var(--black);background:var(--white);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
 
-  <style>
-    :root{
-      --bg:#ffffff;
-      --text:#0b0f18;
-      --muted: rgba(11,15,24,.72);
-      --muted2: rgba(11,15,24,.55);
-      --line: rgba(11,15,24,.10);
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--red);width:0;z-index:9999;box-shadow:0 0 10px rgba(232,0,13,.5);transition:width .08s}
 
-      --btn:#111827;
-      --btnText:#fff;
+/* TOPBAR */
+.topbar{background:var(--black);height:36px;border-bottom:1px solid rgba(255,255,255,.06)}
+.topbar-in{max-width:1320px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:100%}
+.topbar span,.topbar a{font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:.04em}
+.topbar a:hover{color:rgba(255,255,255,.85)}
+.tb-r{display:flex;gap:1.6rem}
 
-      --max: 1120px;
-      --radius: 18px;
+/* NAV */
+nav{background:var(--white);position:sticky;top:0;z-index:300;border-bottom:1px solid var(--lgray);box-shadow:0 1px 12px rgba(0,0,0,.05)}
+.nav-in{max-width:1320px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:.7rem}
+.logo-mark{background:var(--red);color:#fff;font-family:var(--h);font-size:.82rem;font-weight:800;padding:.42rem .8rem;line-height:1;border-radius:var(--r)}
+.logo-text{font-family:var(--h);font-size:1.05rem;font-weight:700;color:var(--black);letter-spacing:.02em}
+.nav-links{display:flex;list-style:none;height:66px}
+.nav-links a{display:flex;align-items:center;padding:0 1rem;font-size:.83rem;font-weight:500;color:var(--gray);transition:color .2s;position:relative;letter-spacing:.01em}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:1rem;right:1rem;height:2px;background:var(--red);transform:scaleX(0);transition:transform .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--black)}
+.nav-links a.active::after,.nav-links a:hover::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:.7rem}
+.btn-ghost{background:transparent;border:1.5px solid var(--lgray);color:var(--gray);padding:.48rem 1.05rem;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;border-radius:var(--r)}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+.btn-primary{background:var(--red);color:#fff;padding:.52rem 1.2rem;font-size:.8rem;font-weight:700;border:none;cursor:pointer;transition:background .2s;border-radius:var(--r);display:inline-block}
+.btn-primary:hover{background:var(--red-dk)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--black);display:block;transition:all .3s;border-radius:1px}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob-menu{display:none;position:fixed;top:102px;left:0;right:0;background:#fff;border-bottom:2px solid var(--red);box-shadow:var(--shadow-lg);z-index:299;flex-direction:column;max-height:calc(100vh - 102px);overflow-y:auto}
+.mob-menu.open{display:flex}
+.mob-menu a{padding:1rem 2rem;font-size:.95rem;color:var(--dark);border-bottom:1px solid var(--lgray);font-weight:500;transition:color .2s,background .2s}
+.mob-menu a:hover{color:var(--red);background:var(--bg)}
+.mob-menu .btn-primary{margin:1.2rem 2rem;display:block;text-align:center}
 
-      /* FONT: Times New Roman (headlines), sans (body) */
-      --serif: "Times New Roman", Times, Georgia, serif;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    }
+/* HERO */
+.hero{background:var(--black);min-height:90vh;display:grid;grid-template-columns:1.2fr 1fr;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 100% 50%,rgba(232,0,13,.08) 0%,transparent 65%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-l{padding:5rem 3rem 5rem 4rem;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:.55rem;background:rgba(232,0,13,.12);border:1px solid rgba(232,0,13,.25);color:var(--red);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .85rem;border-radius:100px;margin-bottom:1.8rem;width:fit-content}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse-dot 2s ease-in-out infinite}
+.hero h1{font-family:var(--h);font-size:clamp(2.6rem,4.4vw,4.6rem);font-weight:800;line-height:1.02;color:#fff;margin-bottom:1.4rem;letter-spacing:-.02em}
+.hero h1 .accent{color:var(--red)}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.6);max-width:480px;line-height:1.8;margin-bottom:2.4rem}
+.hero-sub strong{color:#fff;font-weight:600}
+.hero-btns{display:flex;gap:.7rem;flex-wrap:wrap}
+.btn-hero{background:var(--red);color:#fff;padding:.85rem 1.8rem;font-size:.85rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;border-radius:var(--r);display:inline-block}
+.btn-hero:hover{background:var(--red-dk);transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,0,13,.3)}
+.btn-hero-g{background:transparent;color:rgba(255,255,255,.8);padding:.85rem 1.8rem;font-size:.85rem;font-weight:600;border:1.5px solid rgba(255,255,255,.18);cursor:pointer;transition:all .2s;border-radius:var(--r);display:inline-block}
+.btn-hero-g:hover{border-color:#fff;color:#fff}
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: var(--sans);
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.45;
-    }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+.hero-r{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:3rem;overflow:hidden}
+.hero-img-wrap{position:relative;width:100%;max-width:480px;aspect-ratio:3/4;border-radius:var(--r);overflow:hidden;background:#0a0a0a;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(232,0,13,.15)}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.hero-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,0,13,.08) 0%,transparent 50%,rgba(0,0,0,.4) 100%);z-index:2}
+.hero-img-overlay{position:absolute;left:1.5rem;right:1.5rem;bottom:1.5rem;z-index:3;display:flex;justify-content:space-between;align-items:flex-end}
+.hero-img-stat{color:#fff}
+.hero-img-stat .n{font-family:var(--h);font-size:1.6rem;font-weight:800;line-height:1;color:var(--red)}
+.hero-img-stat .l{font-size:.65rem;color:rgba(255,255,255,.6);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem}
+.hero-img-tag{position:absolute;top:1.5rem;left:1.5rem;z-index:3;background:rgba(232,0,13,.95);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .7rem;border-radius:100px}
 
-    /* HEADER (minimal, Tesla-ish) */
-    header{
-      position:fixed; top:0; left:0; right:0; z-index:50;
-      background: rgba(255,255,255,.86);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(11,15,24,.06);
-    }
-    .navRow{
-      max-width:var(--max);
-      margin:0 auto;
-      padding: 14px 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      text-decoration:none;
-      min-width: 240px;
-    }
-    .mark{
-      width:30px; height:30px; border-radius:12px;
-      border:1px solid rgba(11,15,24,.10);
-      background: linear-gradient(135deg, rgba(11,15,24,.09), rgba(11,15,24,.02));
-      position:relative;
-    }
-    .mark:after{
-      content:""; position:absolute; inset:9px;
-      border-radius:10px;
-      border:1px solid rgba(11,15,24,.25);
-      transform: rotate(10deg); opacity:.55;
-    }
-    .brand strong{font-weight:950; letter-spacing:.25px;}
-    .brand span{display:block; margin-top:2px; font-size:12.5px; color:var(--muted2);}
+/* MARQUEE */
+.mq-wrap{background:var(--bg);border-top:1px solid var(--lgray);border-bottom:1px solid var(--lgray);overflow:hidden;padding:.7rem 0}
+.mq{display:flex;width:max-content;animation:mq 35s linear infinite}
+.mq-item{display:flex;align-items:center;gap:.5rem;padding:0 2rem;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);border-right:1px solid var(--lgray);white-space:nowrap}
+.mq-dot{width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0}
 
-    nav{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
-    .navlink{
-      text-decoration:none;
-      font-weight:750;
-      color: rgba(11,15,24,.78);
-      padding:10px 10px;
-      border-radius:999px;
-    }
-    .navlink:hover{background: rgba(11,15,24,.04)}
-    .navlink.active{
-      background: rgba(11,15,24,.06);
-      color: rgba(11,15,24,.92);
-    }
-    .navcta{
-      text-decoration:none;
-      font-weight:900;
-      padding:10px 14px;
-      border-radius:999px;
-      background: var(--btn);
-      color: var(--btnText);
-      border:1px solid rgba(11,15,24,.12);
-    }
-    .navcta:hover{filter:brightness(.95)}
+/* B2B BAND */
+.b2b{background:var(--red);padding:2.8rem 0;position:relative;overflow:hidden}
+.b2b::before{content:'OEM';position:absolute;right:-1rem;top:50%;transform:translateY(-50%);font-family:var(--h);font-size:10rem;font-weight:800;color:rgba(255,255,255,.06);letter-spacing:-.05em;line-height:1}
+.b2b-in{max-width:1320px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:auto 1fr auto;gap:3rem;align-items:center}
+.b2b-l{font-family:var(--h);font-size:1.7rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.2}
+.b2b-l span{display:block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.4rem;font-family:var(--b)}
+.b2b-text{font-size:.9rem;color:rgba(255,255,255,.85);line-height:1.75}
+.b2b-text strong{color:#fff;font-weight:700}
+.btn-b2b{background:#fff;color:var(--red);padding:.75rem 1.6rem;font-size:.82rem;font-weight:700;border:2px solid #fff;cursor:pointer;transition:all .2s;border-radius:var(--r);white-space:nowrap}
+.btn-b2b:hover{background:transparent;color:#fff}
 
-    /* PANELS */
-    .panel{
-      min-height: 100vh;
-      position:relative;
-      display:flex;
-      align-items:flex-end;
-      padding: 98px 0 64px; /* room for fixed header */
-      border-bottom: 1px solid rgba(11,15,24,.06);
-    }
-    .panel .inner{
-      width:100%;
-      max-width: var(--max);
-      margin:0 auto;
-      padding: 0 18px;
-    }
+/* SHARED */
+section{padding:5rem 0}
+.wrap{max-width:1320px;margin:0 auto;padding:0 2rem}
+.s-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem}
+.s-eyebrow::before{content:'';width:18px;height:2px;background:var(--red)}
+.s-h{font-family:var(--h);font-size:clamp(1.9rem,3vw,2.7rem);font-weight:800;line-height:1.06;color:var(--black);letter-spacing:-.02em}
+.s-h .acc{color:var(--red)}
+.s-p{margin-top:.8rem;font-size:.95rem;color:var(--gray);max-width:580px;line-height:1.85}
+.section-header{margin-bottom:3rem}
 
-    /* INDUSTRIAL TECH BACKGROUND GRID (subtle) */
-    .panel:after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        linear-gradient(transparent 92%, rgba(255,255,255,.05) 92%, transparent 94%),
-        linear-gradient(90deg, transparent 92%, rgba(255,255,255,.05) 92%, transparent 94%);
-      background-size: 56px 56px, 56px 56px;
-      opacity:.20;
-      pointer-events:none;
-      mix-blend-mode: overlay;
-    }
+/* CAPABILITIES — visual cards with icons */
+.cap-sec{background:var(--bg)}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.cap-card{background:#fff;padding:2.2rem;border:1px solid var(--lgray);border-radius:var(--r);transition:all .28s;position:relative;overflow:hidden;cursor:default}
+.cap-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.cap-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:transparent}
+.cap-card:hover::before{transform:scaleX(1)}
+.cap-card.featured{background:var(--black);border-color:var(--red)}
+.cap-card.featured::before{transform:scaleX(1)}
+.cap-card.featured h3{color:#fff}
+.cap-card.featured p{color:rgba(255,255,255,.5)}
+.cap-icon{width:54px;height:54px;background:var(--red-lt);border-radius:var(--r);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;color:var(--red);border:1px solid rgba(232,0,13,.18)}
+.cap-card.featured .cap-icon{background:rgba(232,0,13,.15);border-color:rgba(232,0,13,.35)}
+.cap-card h3{font-family:var(--h);font-size:1.05rem;font-weight:700;margin-bottom:.6rem;letter-spacing:-.01em}
+.cap-card p{font-size:.85rem;color:var(--gray);line-height:1.78}
 
-    .bg{position:absolute; inset:0; z-index:-2; overflow:hidden; background:#000;}
-    .bg img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transform: scale(1.02);
-      filter: saturate(1.06) contrast(1.05);
-    }
-    .shade{
-      position:absolute; inset:0; z-index:-1;
-      background:
-        linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.30) 44%, rgba(0,0,0,.10) 76%, rgba(0,0,0,0) 100%),
-        radial-gradient(900px 480px at 20% 20%, rgba(0,0,0,.34), transparent 60%);
-    }
+/* OEM SECTION — sticky scroll */
+.oem-sticky{background:var(--black);padding:0;position:relative}
+.oem-sticky-grid{display:grid;grid-template-columns:1fr 1fr;align-items:flex-start;min-height:100vh}
+.oem-sticky-l{padding:6rem 4rem 6rem 4rem;display:flex;flex-direction:column;justify-content:center;position:sticky;top:80px;height:max-content;min-height:calc(100vh - 80px)}
+.oem-sticky-l .s-h{color:#fff}
+.oem-sticky-l .s-p{color:rgba(255,255,255,.45);max-width:100%}
+.oem-sticky-l .s-eyebrow{color:rgba(232,0,13,.85)}
+.oem-sticky-r{padding:6rem 4rem 6rem 0;display:flex;flex-direction:column;gap:2rem}
+.oem-step-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:2.4rem;border-radius:var(--r);transition:all .3s;position:relative}
+.oem-step-card:hover{background:rgba(232,0,13,.04);border-color:rgba(232,0,13,.25);transform:translateX(8px)}
+.oem-step-num{font-family:var(--h);font-size:2.5rem;font-weight:800;color:var(--red);line-height:1;margin-bottom:.8rem;opacity:.9}
+.oem-step-card h4{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.5rem;font-family:var(--b)}
+.oem-step-card p{font-size:.84rem;color:rgba(255,255,255,.45);line-height:1.78}
+.oem-spec{margin-top:.5rem;padding:1.5rem;background:rgba(232,0,13,.05);border:1px solid rgba(232,0,13,.15);border-radius:var(--r)}
+.oem-spec h5{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,0,13,.85);margin-bottom:1rem}
+.oem-spec-row{display:flex;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.82rem}
+.oem-spec-row:last-child{border-bottom:none}
+.osk{color:rgba(255,255,255,.4)}.osv{color:#fff;font-weight:600}
 
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      font-weight:850;
-      font-size:12.5px;
-      letter-spacing:.2px;
-      color: rgba(255,255,255,.88);
-      padding:8px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.20);
-    }
-    .dot{
-      width:8px; height:8px; border-radius:50%;
-      background: rgba(255,255,255,.95);
-      box-shadow: 0 0 0 4px rgba(255,255,255,.16);
-    }
+/* CONFIGURATOR */
+.cfg-sec{background:var(--white);position:relative;overflow:hidden}
+.cfg-sec::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,var(--red-lt) 0%,transparent 70%);pointer-events:none}
+.cfg-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:2.5rem;align-items:center;position:relative;z-index:1}
+.cfg-controls{display:flex;flex-direction:column;gap:2rem}
+.cfg-group h4{font-family:var(--b);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:1rem}
+.cfg-options{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.cfg-option{background:var(--bg);border:1.5px solid var(--lgray);padding:1rem .8rem;border-radius:var(--r);text-align:center;cursor:pointer;transition:all .2s;font-family:var(--b)}
+.cfg-option:hover{border-color:var(--red)}
+.cfg-option.active{background:var(--black);border-color:var(--red);color:#fff}
+.cfg-option-label{font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);transition:color .2s}
+.cfg-option.active .cfg-option-label,.cfg-option:hover .cfg-option-label{color:var(--red)}
+.cfg-option.active .cfg-option-label{color:rgba(255,255,255,.6)}
+.cfg-option-val{font-family:var(--h);font-size:1.1rem;font-weight:800;color:var(--black);margin-top:.3rem}
+.cfg-option.active .cfg-option-val{color:#fff}
+.cfg-preview{background:var(--black);border-radius:var(--r);padding:3rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:480px;position:relative;overflow:hidden}
+.cfg-preview::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(232,0,13,.1) 0%,transparent 70%)}
+.cfg-skeleton{position:relative;z-index:1;filter:drop-shadow(0 0 30px rgba(232,0,13,.3));transition:transform .4s}
+.cfg-summary{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);width:100%;position:relative;z-index:1}
+.cfg-summary-row{display:flex;justify-content:space-between;padding:.45rem 0;font-size:.82rem}
+.cfg-sk{color:rgba(255,255,255,.35)}
+.cfg-sv{color:#fff;font-weight:600}
+.cfg-cta{margin-top:1.2rem;width:100%;padding:.8rem;background:var(--red);color:#fff;border:none;font-size:.83rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background .2s;border-radius:var(--r);text-align:center}
+.cfg-cta:hover{background:var(--red-dk)}
 
-    /* HEADLINES: Times New Roman */
-    h1, h2{
-      font-family: var(--serif);
-      font-weight: 700;
-      letter-spacing: -0.6px;
-    }
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(42px, 6vw, 76px);
-      line-height:1.00;
-      color:#fff;
-      max-width: 18ch;
-    }
-    h2{
-      margin:12px 0 10px;
-      font-size: clamp(30px, 4vw, 52px);
-      line-height:1.05;
-      color:#fff;
-      max-width: 22ch;
-    }
+/* PRODUCTS */
+.prod-sec{background:var(--bg)}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.prod-card{background:#fff;border:1px solid var(--lgray);border-radius:var(--r);overflow:hidden;transition:all .28s}
+.prod-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--red)}
+.prod-img{height:240px;position:relative;overflow:hidden;background:#111}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prod-card:hover .prod-img img{transform:scale(1.05)}
+.prod-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,0,13,.05) 0%,transparent 40%,rgba(0,0,0,.3) 100%)}
+.prod-badge{position:absolute;top:1rem;left:1rem;background:var(--red);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .6rem;border-radius:100px;z-index:2}
+.prod-body{padding:1.6rem}
+.prod-name{font-family:var(--h);font-size:1.15rem;font-weight:800;margin-bottom:.15rem;letter-spacing:-.01em}
+.prod-type{font-size:.7rem;color:var(--red);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem}
+.prod-body p{font-size:.83rem;color:var(--gray);line-height:1.78;margin-bottom:1rem}
+.prod-specs{display:flex;gap:1rem;flex-wrap:wrap;padding-top:1rem;border-top:1px solid var(--lgray)}
+.psp{font-size:.72rem;color:var(--gray)}
+.psp strong{display:block;color:var(--black);font-weight:700;font-size:.82rem}
 
-    /* Tesla rule: keep it short */
-    .lead{
-      margin:0;
-      font-size: 17px;
-      color: rgba(255,255,255,.88);
-      max-width: 64ch; /* tighter for premium feel */
-    }
-    .micro{
-      margin-top:10px;
-      color: rgba(255,255,255,.74);
-      font-size: 13px;
-      max-width: 70ch;
-    }
+/* MARKETS */
+.serve-sec{background:var(--white)}
+.serve-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.serve-card{background:var(--bg);border:1px solid var(--lgray);border-radius:var(--r);overflow:hidden;transition:all .25s;cursor:default}
+.serve-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--red)}
+.serve-img{height:160px;position:relative;overflow:hidden;background:#111}
+.serve-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.serve-card:hover .serve-img img{transform:scale(1.05)}
+.serve-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.5) 100%)}
+.serve-tag{position:absolute;top:.8rem;left:.8rem;font-family:var(--h);font-size:1.5rem;font-weight:800;color:rgba(255,255,255,.95);z-index:2;line-height:1}
+.serve-content{padding:1.4rem}
+.serve-content h3{font-family:var(--h);font-size:.98rem;font-weight:700;margin-bottom:.4rem;letter-spacing:-.01em}
+.serve-content p{font-size:.8rem;color:var(--gray);line-height:1.72}
 
-    .actions{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top: 18px;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:12px 16px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.25);
-      background: rgba(255,255,255,.10);
-      color:#fff;
-      text-decoration:none;
-      font-weight:900;
-    }
-    .btn:hover{background: rgba(255,255,255,.16)}
-    .btn.primary{
-      background: #fff;
-      color:#0b0f18;
-      border-color: rgba(255,255,255,.55);
-    }
-    .btn.primary:hover{filter:brightness(.96)}
+/* GALLERY */
+.gallery-sec{background:var(--black)}
+.gallery-sec .s-h{color:#fff}
+.gallery-sec .s-p{color:rgba(255,255,255,.45)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-top:1.5rem}
+.gallery-item{position:relative;border-radius:var(--r);overflow:hidden;cursor:pointer;background:#1a1a1a;aspect-ratio:1;transition:transform .3s}
+.gallery-item:hover{transform:scale(1.02)}
+.gallery-item.wide{grid-column:span 2;aspect-ratio:2/1}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s,filter .3s;filter:saturate(.85)}
+.gallery-item:hover img{transform:scale(1.08);filter:saturate(1)}
+.gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 50%,rgba(0,0,0,.7) 100%);transition:opacity .3s;opacity:.7}
+.gallery-item:hover::after{opacity:.4}
+.gallery-cap{position:absolute;left:1rem;right:1rem;bottom:1rem;color:#fff;z-index:2}
+.gallery-cap-tag{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.2rem}
+.gallery-cap-title{font-family:var(--h);font-size:1rem;font-weight:700;line-height:1.2}
 
-    /* WHITE SECTIONS (industrial spec rows) */
-    .section{
-      background:#fff;
-      color: var(--text);
-      padding: 72px 0;
-    }
-    .section h3{
-      font-family: var(--serif);
-      margin:0 0 10px;
-      font-size: 26px;
-      letter-spacing: -0.4px;
-    }
-    .section p{margin:0; color:var(--muted); max-width: 78ch;}
+/* MARKET STATS */
+.market-sec{background:var(--white)}
+.market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.mkt-card{background:var(--bg);padding:2.2rem;border:1px solid var(--lgray);border-radius:var(--r);transition:all .25s}
+.mkt-card:hover{background:var(--white);box-shadow:var(--shadow);border-color:var(--red)}
+.mkt-n{font-family:var(--h);font-size:2.6rem;font-weight:800;color:var(--red);line-height:1;margin-bottom:.3rem;letter-spacing:-.03em}
+.mkt-unit{font-size:.68rem;color:var(--gray);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.2rem}
+.mkt-card h3{font-family:var(--h);font-size:.95rem;font-weight:700;color:var(--black);margin-bottom:.5rem}
+.mkt-card p{font-size:.83rem;color:var(--gray);line-height:1.78}
 
-    .rows{
-      margin-top:18px;
-      border-top:1px solid rgba(11,15,24,.10);
-    }
-    .row{
-      display:flex;
-      justify-content:space-between;
-      gap:14px;
-      padding: 16px 0;
-      border-bottom:1px solid rgba(11,15,24,.10);
-    }
-    .row b{min-width: 260px}
-    .row span{color:var(--muted)}
-    .tag{
-      font-size:12px;
-      font-weight:850;
-      color: rgba(11,15,24,.72);
-      background: rgba(11,15,24,.04);
-      border:1px solid rgba(11,15,24,.10);
-      padding:8px 10px;
-      border-radius:999px;
-      white-space:nowrap;
-      height: fit-content;
-    }
+/* PROCESS */
+.proc-sec{background:var(--bg)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;position:relative}
+.proc-grid::before{content:'';position:absolute;top:22px;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,var(--red) 20%,var(--red) 80%,transparent);opacity:.3}
+.proc-step{background:var(--white);border:1px solid var(--lgray);padding:2rem 1.6rem;border-radius:var(--r);transition:all .25s;position:relative}
+.proc-step:hover{border-color:var(--red);box-shadow:var(--shadow);transform:translateY(-3px)}
+.proc-num{width:44px;height:44px;background:var(--red);color:#fff;font-family:var(--h);font-size:1.05rem;font-weight:800;display:flex;align-items:center;justify-content:center;border-radius:50%;margin-bottom:1.2rem;position:relative;z-index:1}
+.proc-step h3{font-family:var(--h);font-size:.92rem;font-weight:700;margin-bottom:.45rem;letter-spacing:-.01em}
+.proc-step p{font-size:.8rem;color:var(--gray);line-height:1.72}
 
-    /* RFQ */
-    .rfqBox{
-      margin-top:18px;
-      border:1px solid rgba(11,15,24,.10);
-      border-radius: 22px;
-      background: rgba(11,15,24,.02);
-      padding: 18px;
-    }
-    form{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top: 12px;
-    }
-    .field{
-      border-radius: 14px;
-      border:1px solid rgba(11,15,24,.12);
-      background: #fff;
-      padding: 12px 12px;
-      outline:none;
-      font-size: 14px;
-    }
-    textarea.field{grid-column: 1 / -1; min-height: 120px; resize: vertical;}
-    .field:focus{
-      border-color: rgba(11,15,24,.35);
-      box-shadow: 0 0 0 4px rgba(11,15,24,.08);
-    }
-    .hint{color: var(--muted2); font-size: 13px; margin-top:10px}
+/* CONTACT */
+.contact-sec{background:var(--dark)}
+.contact-sec .s-h{color:#fff}
+.contact-sec .s-p{color:rgba(255,255,255,.4)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:4rem;margin-top:3rem}
+.contact-info h3{font-family:var(--h);font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:1.6rem}
+.c-detail{display:flex;gap:.85rem;margin-bottom:1.2rem;align-items:flex-start}
+.c-detail-icon{color:var(--red);font-size:1rem;margin-top:.15rem;flex-shrink:0;width:20px;text-align:center}
+.c-detail-body strong{display:block;font-size:.78rem;color:rgba(255,255,255,.7);font-weight:600;margin-bottom:.15rem}
+.c-detail-body span{font-size:.83rem;color:rgba(255,255,255,.4);line-height:1.6}
+.c-note{background:rgba(232,0,13,.08);border:1px solid rgba(232,0,13,.2);border-radius:var(--r);padding:1.2rem 1.4rem;margin-top:1.8rem}
+.c-note p{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.75;font-style:italic}
+.c-note strong{color:var(--red);font-style:normal}
+.contact-form-wrap{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:2.3rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.fg label{font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.32)}
+.fg input,.fg select,.fg textarea{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:#fff;padding:.7rem 1rem;font-family:var(--b);font-size:.86rem;outline:none;transition:border-color .2s;width:100%;border-radius:var(--r);-webkit-appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red)}
+.fg select option{background:#1a1a1a}
+.fg textarea{resize:vertical;min-height:100px}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.18)}
+.form-submit{width:100%;padding:.85rem;background:var(--red);color:#fff;border:none;font-size:.88rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:.5rem;border-radius:var(--r)}
+.form-submit:hover{background:var(--red-dk)}
+.form-ok{display:none;margin-top:1rem;padding:1.1rem 1.4rem;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);border-radius:var(--r)}
+.form-ok p{font-size:.84rem;color:rgba(255,255,255,.6);line-height:1.7}
+.form-ok strong{color:#4ade80}
 
-    footer{
-      padding: 28px 0 40px;
-      color: var(--muted2);
-      font-size: 13px;
-      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
-      border-top:1px solid rgba(11,15,24,.08);
-    }
+/* FOOTER */
+footer{background:var(--black);padding:4rem 0 0}
+.footer-grid{max-width:1320px;margin:0 auto;padding:0 2rem 3rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.f-brand .logo-mark{display:inline-block;margin-bottom:1.1rem}
+.f-brand p{font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.85;max-width:280px}
+.f-brand-addr{font-size:.78rem;color:rgba(255,255,255,.22);margin-top:1.1rem;line-height:1.7;font-style:italic}
+.f-col h5{font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.2rem}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.f-col a{font-size:.82rem;color:rgba(255,255,255,.42);transition:color .2s}
+.f-col a:hover{color:#fff}
+.footer-btm{max-width:1320px;margin:0 auto;padding:1.4rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-btm p{font-size:.72rem;color:rgba(255,255,255,.18)}
+.f-made{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(232,0,13,.5)}
 
-    /* MOBILE */
-    @media (max-width: 860px){
-      nav{display:none}
-      .row{flex-direction:column}
-      .tag{align-self:flex-start}
-      form{grid-template-columns:1fr}
-      .panel{padding: 92px 0 54px}
-      .lead{max-width: 60ch}
-    }
-  </style>
+/* ANIMATIONS */
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.reveal.up{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-r{padding:0 2rem 4rem}
+  .hero-l{padding:4rem 2rem 3rem}
+  .hero-img-wrap{max-width:380px;margin:0 auto;aspect-ratio:4/5}
+  .oem-sticky-grid{grid-template-columns:1fr}
+  .oem-sticky-l{position:static;padding:5rem 2rem 2rem;min-height:auto}
+  .oem-sticky-r{padding:0 2rem 5rem}
+  .cfg-grid{grid-template-columns:1fr;gap:3rem}
+  .cfg-preview{order:-1;min-height:380px}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
+  .b2b-in{grid-template-columns:1fr;gap:1.5rem;text-align:left}
+  .b2b::before{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .cap-grid,.prod-grid,.market-grid,.proc-grid,.serve-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;gap:.5rem}
+  .gallery-item.wide{grid-column:span 2}
+  .form-row{grid-template-columns:1fr}
+  .cfg-options{grid-template-columns:1fr 1fr}
+  section{padding:3.5rem 0}
+  .topbar-in,.nav-in,.wrap,.footer-grid,.footer-btm{padding-left:1.5rem;padding-right:1.5rem}
+  .hero-l{padding:3.5rem 1.5rem 2.5rem}
+  .hero-r{padding:0 1.5rem 3.5rem}
+  .tb-r{display:none}
+  .footer-grid{grid-template-columns:1fr}
+  .b2b-in{padding:0 1.5rem}
+  .nav-right .btn-ghost{display:none}
+  .b2b-l{font-size:1.4rem}
+  .oem-sticky-l,.oem-sticky-r{padding-left:1.5rem;padding-right:1.5rem}
+}
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="navRow">
-      <a class="brand" href="#top" aria-label="E-Onus home">
-        <span class="mark" aria-hidden="true"></span>
-        <div>
-          <strong>E-Onus Technologies</strong>
-          <span>Build & assemble • OEM + fleet • Quality & testing</span>
+
+<div id="prog"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-in">
+    <span>&#127482;&#127480;&nbsp; Massachusetts &middot; OEM Manufacturing &middot; Nationwide Installation</span>
+    <div class="tb-r">
+      <a href="#about">About</a>
+      <a href="#oem">OEM</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <a href="#" class="logo">
+      <div class="logo-mark">E-onus</div>
+      <span class="logo-text">Technologies</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#capabilities" data-section="capabilities">Capabilities</a></li>
+      <li><a href="#oem" data-section="oem">OEM</a></li>
+      <li><a href="#configurator" data-section="configurator">Configurator</a></li>
+      <li><a href="#products" data-section="products">Products</a></li>
+      <li><a href="#markets" data-section="markets">Markets</a></li>
+      <li><a href="#gallery" data-section="gallery">Gallery</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#oem" class="btn-ghost">OEM Inquiry</a>
+      <a href="#contact" class="btn-primary">Get a Quote</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mob-menu">
+  <a href="#capabilities">Capabilities</a>
+  <a href="#oem">OEM Services</a>
+  <a href="#configurator">Build a Charger</a>
+  <a href="#products">Products</a>
+  <a href="#markets">Markets</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact" class="btn-primary">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-l">
+    <div class="hero-badge">Massachusetts EV Charging Company</div>
+    <h1>We <span class="accent">Build.</span><br>We Install.<br>We <span class="accent">Power.</span></h1>
+    <p class="hero-sub"><strong>E-onus Technologies</strong> manufactures, installs, and engineers EV charging — including custom OEM hardware built to your design specification.</p>
+    <div class="hero-btns">
+      <a href="#configurator" class="btn-hero">Build Your Charger</a>
+      <a href="#oem" class="btn-hero-g">OEM Services &#8594;</a>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hero-img-wrap">
+      <div class="hero-img-tag">350 kW · DC Fast</div>
+      <img src="https://m.media-amazon.com/images/I/61dvh+QmI3L._UF894,1000_QL80_.jpg" alt="DC Fast EV charging station" onerror="this.parentElement.style.background='radial-gradient(ellipse,#1a1a1a,#0a0a0a)';this.style.display='none'"/>
+      <div class="hero-img-overlay">
+        <div class="hero-img-stat">
+          <div class="n">350 kW</div>
+          <div class="l">Max Output</div>
         </div>
-      </a>
-
-      <nav aria-label="Primary">
-        <a class="navlink" href="#platform">OEM & Fleet</a>
-        <a class="navlink" href="#products">Products</a>
-        <a class="navlink" href="#quality">Quality</a>
-        <a class="navlink" href="#contact">Contact</a>
-        <a class="navcta" href="#rfq">Request RFQ</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- HERO: shorter + stronger -->
-  <section id="top" class="panel">
-    <div class="bg"><img src="assets/img/hero.jpg" alt="EV charging close-up" /></div>
-    <div class="shade"></div>
-
-    <div class="inner">
-      <div class="kicker"><span class="dot" aria-hidden="true"></span> OEM programs • Fleet deployments • Level 2 hardware</div>
-      <h1>Charging hardware that scales.</h1>
-      <p class="lead">Built and assembled for OEM and fleet Level 2 deployments.</p>
-      <p class="micro">RFID control • cables & extension cords • control boards • portable chargers • verification gates</p>
-
-      <div class="actions">
-        <a class="btn primary" href="#rfq">Request RFQ</a>
-        <a class="btn" href="#products">View products</a>
+        <div class="hero-img-stat" style="text-align:right">
+          <div class="n">USA</div>
+          <div class="l">Assembled</div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- OEM + FLEET PANEL -->
-  <section id="platform" class="panel">
-    <div class="bg"><img src="assets/img/fleet.jpg" alt="Fleet and commercial EV charging environment" /></div>
-    <div class="shade"></div>
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq">
+    <div class="mq-item"><div class="mq-dot"></div>OEM Manufacturing</div>
+    <div class="mq-item"><div class="mq-dot"></div>Level 2 AC</div>
+    <div class="mq-item"><div class="mq-dot"></div>DC Fast Charging</div>
+    <div class="mq-item"><div class="mq-dot"></div>Fleet Depots</div>
+    <div class="mq-item"><div class="mq-dot"></div>Commercial Install</div>
+    <div class="mq-item"><div class="mq-dot"></div>Residential</div>
+    <div class="mq-item"><div class="mq-dot"></div>Municipal</div>
+    <div class="mq-item"><div class="mq-dot"></div>NEVI Compliant</div>
+    <div class="mq-item"><div class="mq-dot"></div>Network Management</div>
+    <div class="mq-item"><div class="mq-dot"></div>Built in USA</div>
+    <div class="mq-item"><div class="mq-dot"></div>OEM Manufacturing</div>
+    <div class="mq-item"><div class="mq-dot"></div>Level 2 AC</div>
+    <div class="mq-item"><div class="mq-dot"></div>DC Fast Charging</div>
+    <div class="mq-item"><div class="mq-dot"></div>Fleet Depots</div>
+    <div class="mq-item"><div class="mq-dot"></div>Commercial Install</div>
+    <div class="mq-item"><div class="mq-dot"></div>Residential</div>
+    <div class="mq-item"><div class="mq-dot"></div>Municipal</div>
+    <div class="mq-item"><div class="mq-dot"></div>NEVI Compliant</div>
+    <div class="mq-item"><div class="mq-dot"></div>Network Management</div>
+    <div class="mq-item"><div class="mq-dot"></div>Built in USA</div>
+  </div>
+</div>
 
-    <div class="inner">
-      <h2>Industrial reliability for fleet operations.</h2>
-      <p class="lead">Access-controlled, repeatable builds designed for rollout speed and serviceability.</p>
-      <p class="micro">Procurement-friendly • deployment-first • support planning built in</p>
+<!-- B2B BAND -->
+<div class="b2b">
+  <div class="b2b-in">
+    <div class="b2b-l">
+      <span>Core Differentiator</span>
+      We Build Chargers<br>for Other Companies.
+    </div>
+    <div class="b2b-text">
+      <strong>OEM contract manufacturing</strong> is our flagship capability. Bring us your design — or your idea — and we'll engineer, manufacture, and deliver finished chargers under your brand. From 3.6 kW to 350 kW.
+    </div>
+    <a href="#oem" class="btn-b2b">Explore OEM</a>
+  </div>
+</div>
 
-      <div class="actions">
-        <a class="btn primary" href="#products">Explore products</a>
-        <a class="btn" href="#quality">Quality & testing</a>
+<!-- CAPABILITIES -->
+<section class="cap-sec" id="capabilities">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="s-eyebrow">What We Do</div>
+      <h2 class="s-h">Six Capabilities. <span class="acc">One Company.</span></h2>
+    </div>
+    <div class="cap-grid reveal">
+      <div class="cap-card featured">
+        <div class="cap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3>OEM Manufacturing</h3>
+        <p>Build chargers to your design, under your brand. Power, enclosure, firmware, branding — all customizable.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg></div>
+        <h3>Level 2 AC</h3>
+        <p>240V Level 2 systems for homes and commercial sites. Smart-ready with Wi-Fi, scheduling, and load balancing.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7v8l10-12h-7V2z"/></svg></div>
+        <h3>DC Fast Charging</h3>
+        <p>50 kW to 350 kW chargers for commercial sites, highway corridors, and fleet depots. Built for uptime.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <h3>Installation</h3>
+        <p>Licensed electricians manage the full install: site prep, electrical, mounting, commissioning, permits.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3>Network Management</h3>
+        <p>Cloud platform for monitoring, OTA updates, RFID/app authentication, billing, and reporting.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <h3>Grant Support</h3>
+        <p>NEVI grants, IRA tax credits, state incentives — we handle the documentation and compliance.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PRODUCTS (clean rows) -->
-  <section id="products" class="section">
-    <div class="wrap">
-      <h3>Products & components</h3>
-      <p>High-tech hardware and deployment-critical components for OEM programs and fleet sites.</p>
-
-      <div class="rows" role="list">
-        <div class="row" role="listitem"><b>Level 2 EV Chargers</b><span>Fleet/commercial-ready hardware designed for consistent rollout.</span><span class="tag">Core</span></div>
-        <div class="row" role="listitem"><b>RFID Control</b><span>Access control for managed charging environments and shared sites.</span><span class="tag">Access</span></div>
-        <div class="row" role="listitem"><b>Control Boards</b><span>Electronics for stable operation and integration pathways.</span><span class="tag">Electronics</span></div>
-        <div class="row" role="listitem"><b>Charging Cables</b><span>Durable cables designed for daily use and field replacement.</span><span class="tag">Accessory</span></div>
-        <div class="row" role="listitem"><b>Portable Chargers</b><span>Flexible charging tools for field/service use cases.</span><span class="tag">Portable</span></div>
-        <div class="row" role="listitem"><b>Extension Cords</b><span>Heavy-duty power delivery accessories for industrial conditions.</span><span class="tag">Accessory</span></div>
+<!-- OEM STICKY SCROLL -->
+<section class="oem-sticky" id="oem">
+  <div class="oem-sticky-grid">
+    <div class="oem-sticky-l">
+      <div class="s-eyebrow">OEM Manufacturing</div>
+      <h2 class="s-h">We Build <span class="acc">Your Charger.</span><br>You Sell It.</h2>
+      <p class="s-p">From your specification to a finished, branded product — confidentially manufactured in the United States.</p>
+      <div style="margin-top:2rem">
+        <a href="#contact" class="btn-hero">Start an OEM Conversation</a>
       </div>
     </div>
-  </section>
-
-  <!-- QUALITY PANEL -->
-  <section id="quality" class="panel">
-    <div class="bg"><img src="assets/img/inside.jpg" alt="EV internal components visualization" /></div>
-    <div class="shade"></div>
-
-    <div class="inner">
-      <h2>Quality & testing built in.</h2>
-      <p class="lead">Verification gates that reduce defects and protect rollout timelines.</p>
-      <p class="micro">Incoming inspection • assembly QA gates • electrical verification • functional validation • RFID checks • final inspection</p>
-
-      <div class="actions">
-        <a class="btn primary" href="#rfq">Request RFQ</a>
-        <a class="btn" href="#contact">Contact</a>
+    <div class="oem-sticky-r">
+      <div class="oem-step-card">
+        <div class="oem-step-num">01</div>
+        <h4>Design Intake &amp; NDA</h4>
+        <p>Share your design, concept, or requirements under NDA. Our engineering team reviews feasibility within days.</p>
+      </div>
+      <div class="oem-step-card">
+        <div class="oem-step-num">02</div>
+        <h4>Prototype &amp; Validation</h4>
+        <p>We build a prototype to spec, then run safety testing and performance validation before production.</p>
+      </div>
+      <div class="oem-step-card">
+        <div class="oem-step-num">03</div>
+        <h4>Production Run</h4>
+        <p>Flexible batch sizes — from pilot runs of 10 units to high-volume production. Every unit tested before shipping.</p>
+      </div>
+      <div class="oem-spec">
+        <h5>What We Customize</h5>
+        <div class="oem-spec-row"><span class="osk">Power Output</span><span class="osv">3.6 — 350 kW</span></div>
+        <div class="oem-spec-row"><span class="osk">Connectors</span><span class="osv">J1772 · CCS · CHAdeMO · NACS</span></div>
+        <div class="oem-spec-row"><span class="osk">Enclosure &amp; Branding</span><span class="osv">Fully Custom</span></div>
+        <div class="oem-spec-row"><span class="osk">Display &amp; UX</span><span class="osv">Your Design</span></div>
+        <div class="oem-spec-row"><span class="osk">Network Protocol</span><span class="osv">OCPP 1.6 / 2.0 / Custom</span></div>
+        <div class="oem-spec-row"><span class="osk">Volume</span><span class="osv">Pilot to High-Volume</span></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT + RFQ -->
-  <section id="contact" class="section">
-    <div class="wrap">
-      <h3>Contact & RFQ</h3>
-      <p>Send rollout details (sites, quantities, RFID needs). This form opens your email client and sends to <b>info@e-onus.com</b>.</p>
+<!-- CONFIGURATOR -->
+<section class="cfg-sec" id="configurator">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="s-eyebrow">Interactive Tool</div>
+      <h2 class="s-h">Configure Your <span class="acc">Charger</span></h2>
+      <p class="s-p">Use the configurator below to spec out your ideal charger. We'll send you a tailored quote and feasibility review.</p>
+    </div>
+    <div class="cfg-grid reveal">
+      <div class="cfg-controls">
+        <div class="cfg-group">
+          <h4>Power Level</h4>
+          <div class="cfg-options" data-group="power">
+            <div class="cfg-option active" data-value="11.5"><div class="cfg-option-label">Level 2</div><div class="cfg-option-val">11.5 kW</div></div>
+            <div class="cfg-option" data-value="50"><div class="cfg-option-label">DC Fast</div><div class="cfg-option-val">50 kW</div></div>
+            <div class="cfg-option" data-value="150"><div class="cfg-option-label">DC Fast</div><div class="cfg-option-val">150 kW</div></div>
+            <div class="cfg-option" data-value="240"><div class="cfg-option-label">Ultra Fast</div><div class="cfg-option-val">240 kW</div></div>
+            <div class="cfg-option" data-value="350"><div class="cfg-option-label">Ultra Fast</div><div class="cfg-option-val">350 kW</div></div>
+            <div class="cfg-option" data-value="custom"><div class="cfg-option-label">Custom</div><div class="cfg-option-val">OEM Spec</div></div>
+          </div>
+        </div>
+        <div class="cfg-group">
+          <h4>Connector Type</h4>
+          <div class="cfg-options" data-group="connector">
+            <div class="cfg-option active" data-value="J1772"><div class="cfg-option-label">AC</div><div class="cfg-option-val">J1772</div></div>
+            <div class="cfg-option" data-value="CCS"><div class="cfg-option-label">DC</div><div class="cfg-option-val">CCS</div></div>
+            <div class="cfg-option" data-value="NACS"><div class="cfg-option-label">DC</div><div class="cfg-option-val">NACS</div></div>
+          </div>
+        </div>
+        <div class="cfg-group">
+          <h4>Application</h4>
+          <div class="cfg-options" data-group="app">
+            <div class="cfg-option active" data-value="Residential"><div class="cfg-option-label">Use</div><div class="cfg-option-val">Home</div></div>
+            <div class="cfg-option" data-value="Commercial"><div class="cfg-option-label">Use</div><div class="cfg-option-val">Commercial</div></div>
+            <div class="cfg-option" data-value="Fleet"><div class="cfg-option-label">Use</div><div class="cfg-option-val">Fleet</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="cfg-preview">
+        <div class="cfg-skeleton" id="cfg-svg">
+          <!-- Skeleton charger SVG (updates via JS) -->
+          <svg id="skeleton-svg" width="160" height="280" viewBox="0 0 160 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="262" width="120" height="14" rx="2" fill="none" stroke="#e8000d" stroke-width="1.2" stroke-opacity="0.7"/>
+            <rect id="sk-body" x="28" y="20" width="104" height="240" rx="8" fill="none" stroke="#e8000d" stroke-width="1.5" stroke-opacity="0.85"/>
+            <rect x="28" y="20" width="104" height="4" fill="#e8000d" opacity="0.9"/>
+            <rect id="sk-screen" x="42" y="40" width="76" height="56" rx="4" fill="none" stroke="#e8000d" stroke-width="1" stroke-opacity="0.6" stroke-dasharray="3 3"/>
+            <text id="sk-power" x="80" y="65" text-anchor="middle" fill="#e8000d" font-family="Inter,sans-serif" font-size="13" font-weight="700">11.5 kW</text>
+            <text id="sk-type" x="80" y="82" text-anchor="middle" fill="rgba(232,0,13,0.55)" font-family="Inter,sans-serif" font-size="7" letter-spacing="2">LEVEL 2</text>
+            <circle cx="55" cy="118" r="4" fill="#e8000d" opacity="0.85"/>
+            <circle cx="80" cy="118" r="4" fill="#e8000d" opacity="0.5"/>
+            <circle cx="105" cy="118" r="4" fill="#e8000d" opacity="0.25"/>
+            <line x1="42" y1="138" x2="118" y2="138" stroke="#e8000d" stroke-width="1" stroke-opacity="0.4" stroke-dasharray="2 2"/>
+            <rect id="sk-port" x="55" y="155" width="50" height="34" rx="3" fill="none" stroke="#e8000d" stroke-width="1.2" stroke-opacity="0.7"/>
+            <text id="sk-conn" x="80" y="176" text-anchor="middle" fill="rgba(232,0,13,0.7)" font-family="Inter,sans-serif" font-size="8" font-weight="700">J1772</text>
+            <line x1="42" y1="206" x2="118" y2="206" stroke="#e8000d" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="2 2"/>
+            <line x1="42" y1="214" x2="118" y2="214" stroke="#e8000d" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="2 2"/>
+            <line x1="42" y1="222" x2="118" y2="222" stroke="#e8000d" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="2 2"/>
+            <text x="80" y="247" text-anchor="middle" fill="rgba(232,0,13,0.5)" font-family="Inter,sans-serif" font-size="7" font-weight="700" letter-spacing="2">E-ONUS</text>
+            <rect x="132" y="140" width="14" height="38" rx="3" fill="none" stroke="#e8000d" stroke-width="1" stroke-opacity="0.5"/>
+            <line x1="146" y1="155" x2="146" y2="200" stroke="#e8000d" stroke-width="1" stroke-opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="cfg-summary">
+          <div class="cfg-summary-row"><span class="cfg-sk">Power</span><span class="cfg-sv" id="sum-power">11.5 kW</span></div>
+          <div class="cfg-summary-row"><span class="cfg-sk">Connector</span><span class="cfg-sv" id="sum-conn">J1772</span></div>
+          <div class="cfg-summary-row"><span class="cfg-sk">Application</span><span class="cfg-sv" id="sum-app">Residential</span></div>
+          <div class="cfg-summary-row"><span class="cfg-sk">Estimated Lead Time</span><span class="cfg-sv" id="sum-lead">4–6 weeks</span></div>
+          <a href="#contact" class="cfg-cta" onclick="prefillForm()">Request Quote for This Build</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div id="rfq" class="rfqBox">
-        <form id="rfqForm" novalidate>
-          <input class="field" id="name" placeholder="Your name" required />
-          <input class="field" id="company" placeholder="Company / Fleet" required />
-          <input class="field" id="email" placeholder="you@company.com" required />
-          <input class="field" id="sites" placeholder="Sites (e.g., 1 yard / 12 locations)" />
-          <input class="field" id="qty" placeholder="Estimated quantity (e.g., 25 / 250 / 2,500)" />
-          <input class="field" id="needs" placeholder="Needs (e.g., RFID + cables + portable units)" />
-          <textarea class="field" id="message" placeholder="Deployment notes: environment, cord length, access rules, timeline, any customization." required></textarea>
+<!-- PRODUCTS -->
+<section class="prod-sec" id="products">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="s-eyebrow">Standard Products</div>
+      <h2 class="s-h">Charging Hardware <span class="acc">for Every Application</span></h2>
+    </div>
+    <div class="prod-grid reveal">
+      <div class="prod-card">
+        <div class="prod-img">
+          <div class="prod-badge">Residential</div>
+          <img src="https://www.evalence.ca/wp-content/uploads/2024/02/EV-Charger-Installation-Calgary.jpg" alt="Home EV Charger" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#1a1a1a,#0a0a0a)'"/>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">E-onus Home</div>
+          <div class="prod-type">Level 2 AC · 11.5 kW</div>
+          <p>Smart Wi-Fi Level 2 charger with mobile app, scheduling, and load balancing. Compatible with all EVs.</p>
+          <div class="prod-specs">
+            <div class="psp"><strong>11.5 kW</strong>Output</div>
+            <div class="psp"><strong>J1772</strong>Connector</div>
+            <div class="psp"><strong>IP54</strong>Rated</div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img">
+          <div class="prod-badge">Commercial</div>
+          <img src="https://www.btcpower.com/wp-content/uploads/2023/04/EV-charging-stations-in-a-parking-lot.jpg" alt="Commercial DC Fast Charger" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#1a1a1a,#0a0a0a)'"/>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">E-onus Commercial</div>
+          <div class="prod-type">DC Fast · 150 kW</div>
+          <p>Dual-port DC fast charger with touchscreen, RFID, app payment, and real-time network monitoring.</p>
+          <div class="prod-specs">
+            <div class="psp"><strong>150 kW</strong>Output</div>
+            <div class="psp"><strong>CCS+CHAdeMO</strong>Ports</div>
+            <div class="psp"><strong>OCPP 2.0</strong>Network</div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img">
+          <div class="prod-badge">Fleet · Highway</div>
+          <img src="https://www.electrada.com/wp-content/uploads/2023/09/depot-vs-on-route-charging-1.jpg" alt="Fleet DC Charger" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#1a1a1a,#0a0a0a)'"/>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">E-onus Apex</div>
+          <div class="prod-type">Ultra-Fast DC · 350 kW</div>
+          <p>4-port ultra-fast charger for highway corridors and fleet depots. NEVI compliant, liquid-cooled cable.</p>
+          <div class="prod-specs">
+            <div class="psp"><strong>350 kW</strong>Output</div>
+            <div class="psp"><strong>4× CCS</strong>Ports</div>
+            <div class="psp"><strong>NEVI</strong>Compliant</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETS -->
+<section class="serve-sec" id="markets">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="s-eyebrow">Markets We Serve</div>
+      <h2 class="s-h">From Driveways to <span class="acc">Highway Corridors</span></h2>
+    </div>
+    <div class="serve-grid reveal">
+      <div class="serve-card">
+        <div class="serve-img">
+          <div class="serve-tag">01</div>
+          <img src="https://www.evalence.ca/wp-content/uploads/2024/02/EV-Charger-Installation-Calgary.jpg" alt="Residential" onerror="this.style.display='none';this.parentElement.style.background='#1a1a1a'"/>
+        </div>
+        <div class="serve-content">
+          <h3>Residential</h3>
+          <p>Home installations from single units to multi-unit residential complexes.</p>
+        </div>
+      </div>
+      <div class="serve-card">
+        <div class="serve-img">
+          <div class="serve-tag">02</div>
+          <img src="https://www.btcpower.com/wp-content/uploads/2023/04/EV-charging-stations-in-a-parking-lot.jpg" alt="Commercial" onerror="this.style.display='none';this.parentElement.style.background='#1a1a1a'"/>
+        </div>
+        <div class="serve-content">
+          <h3>Commercial</h3>
+          <p>Retail, hospitality, offices, and parking operators with payment integration.</p>
+        </div>
+      </div>
+      <div class="serve-card">
+        <div class="serve-img">
+          <div class="serve-tag">03</div>
+          <img src="https://www.foodlogistics.com/transportation/sustainability/electric-vehicles/article/22884404/-evgo-ev-charging-depot-charges-96-trucks-simultaneously" alt="Fleet" onerror="this.style.display='none';this.parentElement.style.background='#1a1a1a'"/>
+        </div>
+        <div class="serve-content">
+          <h3>Fleet &amp; Logistics</h3>
+          <p>Depot charging for delivery vans, service vehicles, buses, and trucks.</p>
+        </div>
+      </div>
+      <div class="serve-card">
+        <div class="serve-img">
+          <div class="serve-tag">04</div>
+          <img src="https://tcaelectric.ca/wp-content/uploads/2023/09/public-ev-charging-installation.jpg" alt="Municipal" onerror="this.style.display='none';this.parentElement.style.background='#1a1a1a'"/>
+        </div>
+        <div class="serve-content">
+          <h3>Municipal</h3>
+          <p>Public networks, transit agencies, and government with full NEVI compliance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-sec" id="gallery">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="s-eyebrow">In the Field</div>
+      <h2 class="s-h">Built. Installed. <span class="acc">Powering EVs.</span></h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item wide">
+        <img src="https://www.btcpower.com/wp-content/uploads/2023/04/EV-charging-stations-in-a-parking-lot.jpg" alt="Commercial installation" onerror="this.parentElement.style.background='#1a1a1a'"/>
+        <div class="gallery-cap">
+          <div class="gallery-cap-tag">Commercial Install</div>
+          <div class="gallery-cap-title">Multi-Bay Retail Charging Hub</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.evalence.ca/wp-content/uploads/2024/02/EV-Charger-Installation-Calgary.jpg" alt="Home installation" onerror="this.parentElement.style.background='#1a1a1a'"/>
+        <div class="gallery-cap">
+          <div class="gallery-cap-tag">Residential</div>
+          <div class="gallery-cap-title">Home Garage Install</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://m.media-amazon.com/images/I/61dvh+QmI3L._UF894,1000_QL80_.jpg" alt="DC fast charger" onerror="this.parentElement.style.background='#1a1a1a'"/>
+        <div class="gallery-cap">
+          <div class="gallery-cap-tag">Hardware</div>
+          <div class="gallery-cap-title">DC Fast Charger</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://tcaelectric.ca/wp-content/uploads/2023/09/public-ev-charging-installation.jpg" alt="Public charging" onerror="this.parentElement.style.background='#1a1a1a'"/>
+        <div class="gallery-cap">
+          <div class="gallery-cap-tag">Public Charging</div>
+          <div class="gallery-cap-title">Municipal Network</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.electrada.com/wp-content/uploads/2023/09/depot-vs-on-route-charging-1.jpg" alt="Fleet depot" onerror="this.parentElement.style.background='#1a1a1a'"/>
+        <div class="gallery-cap">
+          <div class="gallery-cap-tag">Fleet Depot</div>
+          <div class="gallery-cap-title">Truck Charging Yard</div>
+        </div>
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://www.foodlogistics.com/wp-content/uploads/2023/01/Truck-Charging-Depot.jpg" alt="Fleet charging" onerror="this.parentElement.style.background='#1a1a1a'"/>
+        <div class="gallery-cap">
+          <div class="gallery-cap-tag">Logistics Fleet</div>
+          <div class="gallery-cap-title">96-Vehicle Charging Depot</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET STATS -->
+<section class="market-sec">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="s-eyebrow">Market Opportunity</div>
+      <h2 class="s-h">Why <span class="acc">Now</span></h2>
+    </div>
+    <div class="market-grid reveal">
+      <div class="mkt-card">
+        <div class="mkt-n">$7.5B</div>
+        <div class="mkt-unit">Federal NEVI Funding</div>
+        <h3>Federal Investment</h3>
+        <p>The largest federal commitment to EV infrastructure in U.S. history. Deployment is actively underway.</p>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-n">500K+</div>
+        <div class="mkt-unit">Chargers Needed by 2030</div>
+        <h3>Massive Supply Gap</h3>
+        <p>The U.S. needs over 500,000 public charging ports by 2030 — a multi-year demand runway.</p>
+      </div>
+      <div class="mkt-card">
+        <div class="mkt-n">40%+</div>
+        <div class="mkt-unit">Year-Over-Year EV Growth</div>
+        <h3>Accelerating Adoption</h3>
+        <p>EV sales growth plus fleet electrification mandates are driving structural demand for chargers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="proc-sec">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="s-eyebrow">How We Work</div>
+      <h2 class="s-h">From First Call to <span class="acc">Final Commissioning</span></h2>
+    </div>
+    <div class="proc-grid reveal">
+      <div class="proc-step">
+        <div class="proc-num">01</div>
+        <h3>Discovery</h3>
+        <p>We discuss your project, site, timeline, and budget. Honest assessment, no obligation.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">02</div>
+        <h3>Design</h3>
+        <p>Site survey covering electrical capacity, ADA, and conduit — followed by full system proposal.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">03</div>
+        <h3>Build</h3>
+        <p>Hardware manufactured or sourced while permitting runs in parallel. Minimum lead time.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">04</div>
+        <h3>Install</h3>
+        <p>Licensed electricians complete installation, network setup, and testing. Live system handed over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="s-eyebrow" style="color:rgba(232,0,13,.7)">Get In Touch</div>
+      <h2 class="s-h">Let's Build <span class="acc">Together.</span></h2>
+      <p class="s-p">Home charger, fleet depot, or OEM partnership — we respond within one business day.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h3>Contact E-onus Technologies</h3>
+        <div class="c-detail">
+          <div class="c-detail-icon">&#9993;</div>
+          <div class="c-detail-body"><strong>Email</strong><span>hello@e-onustech.com</span></div>
+        </div>
+        <div class="c-detail">
+          <div class="c-detail-icon">&#128222;</div>
+          <div class="c-detail-body"><strong>Phone</strong><span>+1 (617) 000-0000</span></div>
+        </div>
+        <div class="c-detail">
+          <div class="c-detail-icon">&#128205;</div>
+          <div class="c-detail-body"><strong>Headquarters</strong><span>Massachusetts, USA<br>Serving clients nationwide</span></div>
+        </div>
+        <div class="c-detail">
+          <div class="c-detail-icon">&#128337;</div>
+          <div class="c-detail-body"><strong>Hours</strong><span>Mon – Fri · 8:00 AM – 6:00 PM EST</span></div>
+        </div>
+        <div class="c-note">
+          <p><strong>OEM inquiries</strong> are handled with full confidentiality. We sign NDAs before any technical discussion.</p>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="fg"><label>First Name *</label><input type="text" placeholder="John" required/></div>
+            <div class="fg"><label>Last Name *</label><input type="text" placeholder="Smith" required/></div>
+          </div>
+          <div class="form-row">
+            <div class="fg"><label>Email *</label><input type="email" placeholder="john@company.com" required/></div>
+            <div class="fg"><label>Phone</label><input type="tel" placeholder="+1 (617) 000-0000"/></div>
+          </div>
+          <div class="fg"><label>Company / Organization</label><input type="text" placeholder="Company name or 'Individual'"/></div>
+          <div class="fg">
+            <label>Project Type *</label>
+            <select id="proj-type" required>
+              <option value="" disabled selected>Select your project type</option>
+              <option>Residential Installation</option>
+              <option>Commercial Installation</option>
+              <option>Fleet / Depot Charging</option>
+              <option>Municipal / Government</option>
+              <option>OEM Manufacturing Partnership</option>
+              <option>Grant / Incentive Support</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Tell us about your project *</label>
+            <textarea id="proj-msg" placeholder="Describe your project — location, number of chargers, power requirements, timeline..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">&#9889; Send Inquiry</button>
+          <div class="form-ok" id="form-ok">
+            <p><strong>Message received.</strong> We'll respond to your inquiry within one business day.</p>
+          </div>
         </form>
-
-        <div class="actions">
-          <a class="btn primary" href="#" id="sendBtn" style="background:#111827;color:#fff;border-color:#111827;">Send RFQ</a>
-          <a class="btn" href="mailto:info@e-onus.com?subject=E-Onus%20RFQ%20%7C%20OEM%20%2B%20Fleet" style="border-color:rgba(11,15,24,.18);color:#111827;background:#fff;">Send via email app</a>
-        </div>
-
-        <div class="hint" id="rfqNote">Tip: include sites + quantity + RFID needs for the fastest response.</div>
       </div>
-
-      <footer>
-        <span>© <span id="year"></span> E-Onus Technologies</span>
-        <span>info@e-onus.com</span>
-      </footer>
     </div>
-  </section>
+  </div>
+</section>
 
-  <script>
-    // Year
-    document.getElementById("year").textContent = new Date().getFullYear();
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <div class="logo-mark">E-onus</div>
+      <p>E-onus Technologies — manufacturing, OEM contract production, and installation of EV charging infrastructure across the United States.</p>
+      <div class="f-brand-addr">Massachusetts, USA<br>hello@e-onustech.com · (617) 000-0000</div>
+    </div>
+    <div class="f-col">
+      <h5>Capabilities</h5>
+      <ul>
+        <li><a href="#oem">OEM Manufacturing</a></li>
+        <li><a href="#capabilities">Level 2 AC</a></li>
+        <li><a href="#capabilities">DC Fast Charging</a></li>
+        <li><a href="#capabilities">Installation</a></li>
+        <li><a href="#capabilities">Network Management</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="#products">E-onus Home</a></li>
+        <li><a href="#products">E-onus Commercial</a></li>
+        <li><a href="#products">E-onus Apex</a></li>
+        <li><a href="#configurator">Configurator</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#contact">About</a></li>
+        <li><a href="#contact">Careers</a></li>
+        <li><a href="#contact">Investors</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-btm">
+    <p>&#169; 2026 E-onus Technologies Inc. &middot; Privacy &middot; Terms</p>
+    <div class="f-made">&#127482;&#127480; Assembled in the USA</div>
+  </div>
+</footer>
 
-    // RFQ mailto
-    const $ = (id) => document.getElementById(id);
-    const note = $("rfqNote");
+<script>
+// Progress bar
+window.addEventListener('scroll',()=>{
+  const pct=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+  document.getElementById('prog').style.width=Math.min(pct,100)+'%';
+});
 
-    $("sendBtn").addEventListener("click", (e) => {
-      e.preventDefault();
+// Reveal
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('up')}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-      const name = ($("name").value || "").trim();
-      const company = ($("company").value || "").trim();
-      const email = ($("email").value || "").trim();
-      const sites = ($("sites").value || "").trim();
-      const qty = ($("qty").value || "").trim();
-      const needs = ($("needs").value || "").trim();
-      const message = ($("message").value || "").trim();
+// Active nav
+const navLinks=document.querySelectorAll('.nav-links a[data-section]');
+new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.dataset.section===e.target.id))}
+  });
+},{rootMargin:'-80px 0px -60% 0px'}).observe?
+document.querySelectorAll('section[id]').forEach(s=>{
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)navLinks.forEach(a=>a.classList.toggle('active',a.dataset.section===e.target.id))}),{rootMargin:'-80px 0px -60% 0px'}).observe(s);
+}):null;
 
-      const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!name || !company || !message || !okEmail) {
-        note.textContent = "Please add name, company, a valid email, and deployment notes.";
-        return;
-      }
+const sObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)navLinks.forEach(a=>a.classList.toggle('active',a.dataset.section===e.target.id))}),{rootMargin:'-80px 0px -60% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>sObs.observe(s));
 
-      const subject = encodeURIComponent("E-Onus RFQ | OEM + Fleet Level 2");
-      const body = encodeURIComponent(
-`RFQ Request (OEM + Fleet)
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(!t)return;
+    e.preventDefault();
+    window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-78,behavior:'smooth'});
+    document.getElementById('mob-menu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  });
+});
 
-Name: ${name}
-Company/Fleet: ${company}
-Email: ${email}
-Sites: ${sites || "(not provided)"}
-Estimated Quantity: ${qty || "(not provided)"}
-Needs: ${needs || "(not provided)"}
+// Hamburger
+document.getElementById('hamburger').addEventListener('click',function(){
+  this.classList.toggle('open');
+  document.getElementById('mob-menu').classList.toggle('open');
+});
 
-Deployment Notes:
-${message}`
-      );
+// CONFIGURATOR
+const cfgState={power:'11.5',connector:'J1772',app:'Residential'};
+const leadTimes={'11.5':'4–6 weeks','50':'6–8 weeks','150':'8–10 weeks','240':'10–12 weeks','350':'12–16 weeks','custom':'Custom timeline'};
+const powerLabels={'11.5':'11.5 kW','50':'50 kW','150':'150 kW','240':'240 kW','350':'350 kW','custom':'Custom OEM'};
+const typeLabels={'11.5':'LEVEL 2','50':'DC FAST','150':'DC FAST','240':'ULTRA FAST','350':'ULTRA FAST','custom':'OEM SPEC'};
 
-      window.location.href = `mailto:info@e-onus.com?subject=${subject}&body=${body}`;
-      note.textContent = "Opening your email app to send the RFQ…";
+document.querySelectorAll('.cfg-options').forEach(group=>{
+  const groupName=group.dataset.group;
+  group.querySelectorAll('.cfg-option').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      group.querySelectorAll('.cfg-option').forEach(o=>o.classList.remove('active'));
+      opt.classList.add('active');
+      cfgState[groupName]=opt.dataset.value;
+      updateConfigurator();
     });
+  });
+});
 
-    // Active nav highlight (scroll spy)
-    const links = Array.from(document.querySelectorAll("nav .navlink"));
-    const sections = links
-      .map(a => document.querySelector(a.getAttribute("href")))
-      .filter(Boolean);
+function updateConfigurator(){
+  document.getElementById('sum-power').textContent=powerLabels[cfgState.power];
+  document.getElementById('sum-conn').textContent=cfgState.connector;
+  document.getElementById('sum-app').textContent=cfgState.app;
+  document.getElementById('sum-lead').textContent=leadTimes[cfgState.power];
+  document.getElementById('sk-power').textContent=powerLabels[cfgState.power];
+  document.getElementById('sk-type').textContent=typeLabels[cfgState.power];
+  document.getElementById('sk-conn').textContent=cfgState.connector;
+  // animation
+  const sk=document.getElementById('cfg-svg');
+  sk.style.transform='scale(0.95)';
+  setTimeout(()=>sk.style.transform='scale(1)',150);
+}
 
-    const obs = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
+function prefillForm(){
+  const sel=document.getElementById('proj-type');
+  const map={Residential:'Residential Installation',Commercial:'Commercial Installation',Fleet:'Fleet / Depot Charging'};
+  if(map[cfgState.app])sel.value=map[cfgState.app];
+  document.getElementById('proj-msg').value=`I'd like a quote for: ${powerLabels[cfgState.power]} charger with ${cfgState.connector} connector, for ${cfgState.app.toLowerCase()} use. Please send specifications and pricing.`;
+}
 
-      links.forEach(l => l.classList.remove("active"));
-      const active = links.find(l => l.getAttribute("href") === `#${visible.target.id}`);
-      if (active) active.classList.add("active");
-    }, { threshold: [0.25, 0.5, 0.75] });
-
-    sections.forEach(s => obs.observe(s));
-  </script>
+// Form submit
+function handleSubmit(e){
+  e.preventDefault();
+  document.getElementById('contact-form').querySelectorAll('input,textarea,select').forEach(el=>el.value='');
+  const ok=document.getElementById('form-ok');
+  ok.style.display='block';
+  setTimeout(()=>ok.style.display='none',7000);
+}
+</script>
 </body>
 </html>
