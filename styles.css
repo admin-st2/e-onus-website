@@ -17,3 +17,15 @@
 .product-cta{background:var(--blue);color:#fff;text-align:center;padding:105px 7vw}.product-cta h2{font-size:clamp(45px,5vw,70px);font-weight:normal;margin:0 0 18px}.product-cta p{font-size:20px}.product-cta .btn{background:#fff;color:var(--ink);border-color:#fff;margin:8px}
 @media(max-width:1050px){.products-v3 .product-hero,.cable-grid{grid-template-columns:1fr}.product-hub{grid-template-columns:1fr 1fr}.product-hero-art{height:360px}.cable-detail-grid{grid-template-columns:1fr 1fr}.system-path{display:grid;grid-template-columns:1fr}.system-arrow{transform:rotate(90deg);text-align:center}.control-grid{grid-template-columns:1fr}}
 @media(max-width:620px){.products-v3 .product-hero{padding:70px 6vw}.products-v3 .product-hero h1{font-size:56px}.product-hub,.product-split,.cable-detail-grid{grid-template-columns:1fr}.product-panel{padding:35px 28px}.cable-cutaway{height:340px}.cut-jacket{top:125px}.cut-braid{top:138px}.cut-cores{top:154px;left:48%}.cut-core{width:38px;height:38px}.system-diagram{padding:25px}}
+
+/* Products blueprint imagery */
+.blueprint-visual{margin:35px 0 0;background:#080b0d;border:1px solid #25292b;overflow:hidden}
+.blueprint-visual img{display:block;width:100%;height:auto;aspect-ratio:2.05/1;object-fit:cover}
+.blueprint-visual figcaption{margin:0;padding:12px 16px;border-top:1px solid #2d3133;color:#a8adb0;font:10px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.development-path{display:grid;grid-template-columns:repeat(4,1fr);margin-top:55px;border-top:1px solid #bbb;border-left:1px solid #bbb}
+.development-path>div{background:#fff;min-height:265px;padding:28px;border-right:1px solid #bbb;border-bottom:1px solid #bbb}
+.development-path small{font:700 10px Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.development-path h3{font-size:25px;font-weight:normal;line-height:1.1;margin:16px 0}
+.development-path p{font:14px/1.6 Arial,sans-serif;color:var(--muted)}
+@media(max-width:900px){.development-path{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.development-path{grid-template-columns:1fr}.blueprint-visual img{aspect-ratio:1.35/1}}
