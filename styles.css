@@ -116,3 +116,29 @@
 .products-directory .pd-feature-body{padding:0}
 .products-directory .pd-feature h2{font-size:32px;line-height:1.05;margin-top:15px}
 @media(max-width:1050px){.products-directory .pd-feature{display:block;padding:30px 0 0;border-left:0;border-top:1px solid #cfd1d0}}
+
+/* Remove discarded decorative illustration without leaving empty half-page panels */
+.feature.feature-text-only{display:block;min-height:0;background:#f5f4f0;border-top:1px solid #d8d9d5;border-bottom:1px solid #d8d9d5}
+.feature.feature-text-only .feature-copy{padding:76px 6vw;max-width:1000px}
+.feature.feature-text-only .title{max-width:840px}
+.feature.feature-text-only .copy{max-width:760px}
+/* Dedicated product category destinations */
+.pf-main{background:#fff}
+.pf-back{padding:32px 6vw 0}
+.pf-back a{font:13px Arial,sans-serif;color:#596166;border-bottom:1px solid #a8adb0;padding-bottom:5px}
+.pf-back a:hover{color:#c51f2a}
+.pf-head{padding:78px 6vw 95px}
+.pf-head h1{font-size:clamp(55px,6.4vw,96px);line-height:.95;font-weight:normal;letter-spacing:-.04em;max-width:1000px;margin:20px 0 26px}
+.pf-head p{font:19px/1.65 Arial,sans-serif;color:#596166;max-width:800px}
+.pf-content{display:grid;grid-template-columns:.7fr 1.3fr;gap:8vw;background:#f5f4f0;border-top:1px solid #d8d9d5;padding:90px 6vw}
+.pf-content h2{font-size:clamp(38px,4vw,64px);font-weight:normal;line-height:1;margin:18px 0}
+.pf-entries{border-top:1px solid #afb2b2}
+.pf-entry{padding:30px 0;border-bottom:1px solid #c9cbca;scroll-margin-top:110px}
+.pf-entry h3{font-size:29px;font-weight:normal;margin:0 0 12px}
+.pf-entry p{font:15px/1.7 Arial,sans-serif;color:#596166;margin:0;max-width:650px}
+.pf-bottom{padding:80px 6vw;background:#111315;color:#fff}
+.pf-bottom h2{font-size:clamp(40px,4.5vw,68px);font-weight:normal;line-height:1;margin:0 0 18px}
+.pf-bottom p{font:17px Arial,sans-serif;color:#bfc3c4}
+.pf-bottom a{display:inline-block;border:1px solid #fff;padding:14px 24px;margin-top:25px;font:14px Arial,sans-serif}
+.pf-bottom a:hover{background:#fff;color:#111315}
+@media(max-width:720px){.pf-head{padding:65px 6vw}.pf-content{grid-template-columns:1fr;padding:65px 6vw}.pf-content h2{margin-bottom:30px}}
